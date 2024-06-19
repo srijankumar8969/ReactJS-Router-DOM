@@ -4,13 +4,7 @@ import "./index.css";
 
 import reportWebVitals from "./reportWebVitals";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useParams,
-  NavLink,
-} from "react-router-dom";
+import {BrowserRouter, Routes, Route, useParams, NavLink,} from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -65,8 +59,7 @@ const Settings = () => {
 };
 
 const SayUser = () => {
-  const params = useParams();
-
+  const params = useParams(); //to get params out of the url and is imported from the react-router-dom //also params is an object
   console.log("params", params);
   return (
     <div>
@@ -81,15 +74,12 @@ const PostPage = () => {
   console.log("Params", params);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`)
+    fetch(`https://jsonplaceholder.typicode.com/posts/${params.postId}`)  //this is very standard practice ki ek .then se pehle data.json ko return karte hain next .then me
       .then((data) => data.json())
-      .then((data) => setData(data));
+      .then((data) => setData(data));  //this willbe simply an object
   }, []);
-
   console.log("Data", data);
-
   if (data === null) return <p>Loading...</p>;
-
   return (
     <div>
       <h1>{data.title}</h1>
@@ -108,8 +98,8 @@ root.render(
         <Route path="/user/:userName" element={<SayUser />} />
 
         <Route path="account">
-          <Route path="profile" element={<Profile />} />
-          <Route path="setting" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/setting" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>
